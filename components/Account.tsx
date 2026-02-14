@@ -6,6 +6,8 @@ import React, { useState } from 'react';
 import { ChevronDown, Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
+import toast, { Toaster } from 'react-hot-toast';
 import { checkoutSchema, CheckoutFormData } from '../lib/schema';
 import Navbar from './Navbar';
 import Input from './Input';
@@ -18,6 +20,7 @@ export default function Account() {
 	const [step, setStep] = useState<'account' | 'shipping' | 'payment'>('account');
     const [isLoading, setIsLoading] = useState(false);
     const { t } = useLanguage();
+    const router = useRouter();
 
 	const {
 		register,
@@ -44,6 +47,12 @@ export default function Account() {
 
 	// Watch values to control the "Check" icon visibility
 	const values = watch();
+
+    const handleCancel = () => {
+        if (confirm('Are you sure you want to cancel the order?')) {
+            router.push('/');
+        }
+    };
 
 	const handleNextStep = async (targetStep: 'shipping' | 'payment' | 'complete') => {
 		let isValid = false;
@@ -102,12 +111,15 @@ export default function Account() {
                     });
                      if (!completeRes.ok) throw new Error('Order completion failed');
 
-                    alert('Order placed successfully!');
+                    toast.success('Order placed successfully!');
+                    setTimeout(() => {
+                        router.push('/');
+                    }, 2000);
                 }
             }
         } catch (error) {
             console.error(error);
-            alert('An error occurred. Please try again.');
+            toast.error('An error occurred. Please try again.');
         } finally {
             setIsLoading(false);
         }
@@ -115,6 +127,7 @@ export default function Account() {
 
 	return (
 		<div className='min-h-screen bg-white font-sans text-slate-900'>
+            <Toaster position="top-center" />
 			<Navbar />
 
 			<div className='max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-80px)]'>
@@ -155,7 +168,7 @@ export default function Account() {
 									</div>
 
 									<div className='border-t border-gray-200 mt-24 pt-8 flex items-center justify-end gap-6'>
-										<button type='button' className='text-gray-600 hover:text-black font-medium transition-colors'>
+										<button type='button' onClick={handleCancel} className='text-gray-600 hover:text-black font-medium transition-colors'>
 											{t('cancelOrder')}
 										</button>
 										<button
@@ -206,7 +219,7 @@ export default function Account() {
 									</div>
 
 									<div className='mt-24 pt-8 flex items-center justify-end gap-6'>
-										<button type='button' onClick={() => setStep('account')} className='text-gray-600 hover:text-black font-medium transition-colors'>
+										<button type='button' onClick={handleCancel} className='text-gray-600 hover:text-black font-medium transition-colors'>
 											{t('cancelOrder')}
 										</button>
 										<button
@@ -268,7 +281,7 @@ export default function Account() {
 									</div>
 
 									<div className='mt-20 pt-8 flex items-center justify-end gap-6'>
-										<button type='button' onClick={() => setStep('shipping')} className='text-gray-600 hover:text-black font-medium transition-colors'>
+										<button type='button' onClick={handleCancel} className='text-gray-600 hover:text-black font-medium transition-colors'>
 											{t('cancelOrder')}
 										</button>
 										<button
