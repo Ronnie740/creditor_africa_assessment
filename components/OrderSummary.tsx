@@ -79,7 +79,7 @@ const OrderSummary = () => {
 			</div>
 
 			{/* Totals */}
-			<div className='space-y-4 text-gray-800'>
+			<div className='space-y-10 text-gray-800'>
 				<div className='flex justify-between'>
 					<span>{t('subtotal')}</span>
 					<span className='font-medium'>{formatCurrency(data.subtotal, data.currency)}</span>
@@ -92,7 +92,7 @@ const OrderSummary = () => {
 					<span className='text-gray-800'>{t('shipping')}</span>
 					<span className='font-medium'>{data.shipping === 0 ? t('freeDelivery') : formatCurrency(data.shipping, data.currency)}</span>
 				</div>
-				<div className='flex justify-between text-xl font-bold pt-4 border-t border-gray-200'>
+				<div className='flex justify-between text-xl font-bold '>
 					<span>{t('total')}</span>
 					<span>{formatCurrency(data.total, data.currency)}</span>
 				</div>

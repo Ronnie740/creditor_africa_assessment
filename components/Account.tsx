@@ -307,7 +307,7 @@ export default function Account() {
 										</div>
 									</div>
 
-									<div className='mt-20 pt-8 flex items-center justify-end gap-6'>
+									<div className='mt-20 pt-8 flex items-center justify-end gap-6 border-t border-gray-200'>
 										<button type='button' onClick={handleCancel} className='text-gray-600 hover:text-black font-medium transition-colors'>
 											{t('cancelOrder')}
 										</button>
