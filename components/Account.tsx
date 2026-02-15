@@ -158,7 +158,7 @@ export default function Account() {
 											<span className='text-gray-800 font-medium cursor-pointer hover:underline'>{t('registerAccount')}</span>
 											<button
 												type='button'
-												className='bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[120px]'
+												className='bg-primary hover:bg-primary/90 text-primary-foreground px-10 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[120px]'
 												onClick={() => handleNextStep('shipping')}
                                                 disabled={isLoading}
                                             >
@@ -174,7 +174,7 @@ export default function Account() {
 										<button
 											type='button'
 											onClick={() => handleNextStep('shipping')}
-											className='bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[160px]'
+											className='bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[160px]'
                                             disabled={isLoading}
                                         >
 											{isLoading ? <Loader2 className="animate-spin" /> : t('shippingDetails')}
@@ -193,7 +193,7 @@ export default function Account() {
 										<div className='flex flex-col space-y-2'>
 											<label className='text-sm text-gray-500 font-medium'>{t('useSavedAddress')}</label>
 											<div className='relative'>
-												<select className='w-full bg-gray-200/70 border-none rounded-md px-4 py-3 text-gray-900 appearance-none focus:ring-2 focus:ring-blue-500 focus:outline-none cursor-pointer'>
+												<select className='w-full bg-gray-200/70 border-none rounded-md px-4 py-3 text-gray-900 appearance-none focus:ring-2 focus:ring-primary focus:outline-none cursor-pointer'>
 													<option>123 , Electric avenue</option>
 												</select>
 												<ChevronDown className='absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-800 pointer-events-none' />
@@ -225,7 +225,7 @@ export default function Account() {
 										<button
 											type='button'
 											onClick={() => handleNextStep('payment')}
-											className='bg-blue-600 hover:bg-blue-700 text-white px-12 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[140px]'
+											className='bg-primary hover:bg-primary/90 text-primary-foreground px-12 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[140px]'
                                             disabled={isLoading}
                                         >
 											{isLoading ? <Loader2 className="animate-spin" /> : t('paymentDetails')}
@@ -243,7 +243,7 @@ export default function Account() {
 										<div className='flex flex-col space-y-2'>
 											<label className='text-sm text-gray-500 font-medium'>{t('useSavedCard')}</label>
 											<div className='relative'>
-												<select className='w-full bg-gray-200/70 border-none rounded-md px-4 py-3 text-gray-900 appearance-none focus:ring-2 focus:ring-blue-500 focus:outline-none cursor-pointer'>
+												<select className='w-full bg-gray-200/70 border-none rounded-md px-4 py-3 text-gray-900 appearance-none focus:ring-2 focus:ring-primary focus:outline-none cursor-pointer'>
 													<option>Mastercard ending 234</option>
 												</select>
 												<ChevronDown className='absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-800 pointer-events-none' />
@@ -287,7 +287,7 @@ export default function Account() {
 										<button
 											type='button'
 											onClick={() => handleNextStep('complete')}
-											className='bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[160px]'
+											className='bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[160px]'
                                             disabled={isLoading}
                                         >
 											{isLoading ? <Loader2 className="animate-spin" /> : t('completeOrder')}

@@ -22,7 +22,7 @@ const Input = ({ label, name, register, error, className, wrapperClassName, show
 				{...props}
 				className={cn(
 					'w-full bg-gray-200/70 border-2 border-transparent rounded-md px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none transition-all',
-					error ? 'border-red-400 bg-red-50' : 'focus:border-blue-500',
+					error ? 'border-red-400 bg-red-50' : 'focus:border-primary',
 					className,
 				)}
 			/>

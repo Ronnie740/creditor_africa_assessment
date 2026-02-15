@@ -25,7 +25,7 @@ const Select = ({ label, name, options, register, className, wrapperClassName, .
 				{...register(name)}
 				{...props}
 				className={cn(
-					'w-full bg-gray-200/70 border-2 border-transparent rounded-md px-4 py-3 text-gray-900 appearance-none focus:border-blue-500 focus:outline-none cursor-pointer',
+					'w-full bg-gray-200/70 border-2 border-transparent rounded-md px-4 py-3 text-gray-900 appearance-none focus:border-primary focus:outline-none cursor-pointer',
 					className,
 				)}>
 				{options.map((opt) => {
