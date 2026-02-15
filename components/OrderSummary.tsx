@@ -74,7 +74,7 @@ const OrderSummary = () => {
 				<label className='text-sm text-gray-500 block mb-2'>Gift Card / Discount code</label>
 				<div className='flex gap-4'>
 					<input className='flex-1 bg-[#e2e9f1] border border-gray-200 rounded-md px-4 py-3 outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all' />
-					<Button className='bg-blue-50 text-blue-600 hover:bg-blue-100 border border-blue-200 shadow-none'>Apply</Button>
+					<button className=' hover:cursor-pointer text-[#448cd2] hover:bg-blue-100 border border-blue-200 shadow-none p-5 rounded-md '>Apply</button>
 				</div>
 			</div>
 

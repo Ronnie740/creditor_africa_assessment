@@ -18,9 +18,9 @@ import { useLanguage } from './LanguageProvider';
 
 export default function Account() {
 	const [step, setStep] = useState<'account' | 'shipping' | 'payment'>('account');
-    const [isLoading, setIsLoading] = useState(false);
-    const { t } = useLanguage();
-    const router = useRouter();
+	const [isLoading, setIsLoading] = useState(false);
+	const { t } = useLanguage();
+	const router = useRouter();
 
 	const {
 		register,
@@ -48,86 +48,86 @@ export default function Account() {
 	// Watch values to control the "Check" icon visibility
 	const values = watch();
 
-    const handleCancel = () => {
-        if (confirm('Are you sure you want to cancel the order?')) {
-            router.push('/');
-        }
-    };
+	const handleCancel = () => {
+		if (confirm('Are you sure you want to cancel the order?')) {
+			router.push('/');
+		}
+	};
 
 	const handleNextStep = async (targetStep: 'shipping' | 'payment' | 'complete') => {
 		let isValid = false;
-        setIsLoading(true);
+		setIsLoading(true);
 
 		try {
-            if (step === 'account') {
-                isValid = await trigger(['email', 'password']);
-                if (isValid) {
-                    const res = await fetch('/api/checkout/account', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email: values.email, password: values.password }),
-                    });
-                    if (!res.ok) throw new Error('Account validation failed');
-                    setStep('shipping');
-                }
-            } else if (step === 'shipping') {
-                isValid = await trigger(['addressLine1', 'streetName', 'postcode', 'shippingMethod']);
-                if (isValid) {
-                     const res = await fetch('/api/checkout/shipping', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ 
-                            addressLine1: values.addressLine1,
-                            streetName: values.streetName,
-                            postcode: values.postcode,
-                            shippingMethod: values.shippingMethod
-                        }),
-                    });
-                    if (!res.ok) throw new Error('Shipping validation failed');
-                    setStep('payment');
-                }
-            } else if (step === 'payment') {
-                isValid = await trigger(['cardName', 'cardNumber', 'expMonth', 'expYear', 'cvc']);
-                if (isValid && targetStep === 'complete') {
-                    const res = await fetch('/api/checkout/payment', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ 
-                            cardName: values.cardName,
-                            cardNumber: values.cardNumber,
-                            expMonth: values.expMonth,
-                            expYear: values.expYear,
-                            cvc: values.cvc
-                        }),
-                    });
+			if (step === 'account') {
+				isValid = await trigger(['email', 'password']);
+				if (isValid) {
+					const res = await fetch('/api/checkout/account', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({ email: values.email, password: values.password }),
+					});
+					if (!res.ok) throw new Error('Account validation failed');
+					setStep('shipping');
+				}
+			} else if (step === 'shipping') {
+				isValid = await trigger(['addressLine1', 'streetName', 'postcode', 'shippingMethod']);
+				if (isValid) {
+					const res = await fetch('/api/checkout/shipping', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({
+							addressLine1: values.addressLine1,
+							streetName: values.streetName,
+							postcode: values.postcode,
+							shippingMethod: values.shippingMethod,
+						}),
+					});
+					if (!res.ok) throw new Error('Shipping validation failed');
+					setStep('payment');
+				}
+			} else if (step === 'payment') {
+				isValid = await trigger(['cardName', 'cardNumber', 'expMonth', 'expYear', 'cvc']);
+				if (isValid && targetStep === 'complete') {
+					const res = await fetch('/api/checkout/payment', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({
+							cardName: values.cardName,
+							cardNumber: values.cardNumber,
+							expMonth: values.expMonth,
+							expYear: values.expYear,
+							cvc: values.cvc,
+						}),
+					});
 
-                    if (!res.ok) throw new Error('Payment validation failed');
-                    
-                    // Final complete call
-                    const completeRes = await fetch('/api/checkout/complete', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ ...values }),
-                    });
-                     if (!completeRes.ok) throw new Error('Order completion failed');
+					if (!res.ok) throw new Error('Payment validation failed');
 
-                    toast.success('Order placed successfully!');
-                    setTimeout(() => {
-                        router.push('/');
-                    }, 2000);
-                }
-            }
-        } catch (error) {
-            console.error(error);
-            toast.error('An error occurred. Please try again.');
-        } finally {
-            setIsLoading(false);
-        }
+					// Final complete call
+					const completeRes = await fetch('/api/checkout/complete', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({ ...values }),
+					});
+					if (!completeRes.ok) throw new Error('Order completion failed');
+
+					toast.success('Order placed successfully!');
+					setTimeout(() => {
+						router.push('/');
+					}, 2000);
+				}
+			}
+		} catch (error) {
+			console.error(error);
+			toast.error('An error occurred. Please try again.');
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	return (
 		<div className='min-h-screen bg-white font-sans text-slate-900'>
-            <Toaster position="top-center" />
+			<Toaster position='top-center' />
 			<Navbar />
 
 			<div className='max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-80px)]'>
@@ -143,7 +143,13 @@ export default function Account() {
 									<h2 className='text-xl font-semibold mb-6'>{t('accountDetails')}</h2>
 
 									<div className='space-y-6'>
-										<Input label={t('emailAddress')} name='email' register={register} error={errors.email?.message ? t('errorEmail') : undefined} showCheckIfValid={!!values.email && !errors.email} />
+										<Input
+											label={t('emailAddress')}
+											name='email'
+											register={register}
+											error={errors.email?.message ? t('errorEmail') : undefined}
+											showCheckIfValid={!!values.email && !errors.email}
+										/>
 										<Input
 											label={t('password')}
 											type='password'
@@ -158,11 +164,10 @@ export default function Account() {
 											<span className='text-gray-800 font-medium cursor-pointer hover:underline'>{t('registerAccount')}</span>
 											<button
 												type='button'
-												className='bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[120px]'
+												className='bg-[#448cd2] hover:bg-[#2a7dd0] cursor-pointer text-white px-10 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[120px]'
 												onClick={() => handleNextStep('shipping')}
-                                                disabled={isLoading}
-                                            >
-												{isLoading ? <Loader2 className="animate-spin" /> : t('login')}
+												disabled={isLoading}>
+												{isLoading ? <Loader2 className='animate-spin' /> : t('login')}
 											</button>
 										</div>
 									</div>
@@ -174,10 +179,9 @@ export default function Account() {
 										<button
 											type='button'
 											onClick={() => handleNextStep('shipping')}
-											className='bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[160px]'
-                                            disabled={isLoading}
-                                        >
-											{isLoading ? <Loader2 className="animate-spin" /> : t('shippingDetails')}
+											className='bg-[#448cd2] hover:bg-[#2a7dd0] cursor-pointer text-white px-8 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[160px]'
+											disabled={isLoading}>
+											{isLoading ? <Loader2 className='animate-spin' /> : t('shippingDetails')}
 										</button>
 									</div>
 								</div>
@@ -200,21 +204,33 @@ export default function Account() {
 											</div>
 										</div>
 
-										<Input label={t('firstLineAddress')} name='addressLine1' register={register} error={errors.addressLine1?.message ? t('errorRequired') : undefined} showCheckIfValid={!!values.addressLine1 && !errors.addressLine1} />
+										<Input
+											label={t('firstLineAddress')}
+											name='addressLine1'
+											register={register}
+											error={errors.addressLine1?.message ? t('errorRequired') : undefined}
+											showCheckIfValid={!!values.addressLine1 && !errors.addressLine1}
+										/>
 
-										<Input label={t('streetName')} name='streetName' register={register} error={errors.streetName?.message ? t('errorRequired') : undefined} showCheckIfValid={!!values.streetName && !errors.streetName} />
+										<Input
+											label={t('streetName')}
+											name='streetName'
+											register={register}
+											error={errors.streetName?.message ? t('errorRequired') : undefined}
+											showCheckIfValid={!!values.streetName && !errors.streetName}
+										/>
 
 										<div className='grid grid-cols-2 gap-6'>
 											<Input label={t('postcode')} name='postcode' register={register} error={errors.postcode?.message ? t('errorRequired') : undefined} />
-											<Select 
-                                                label={t('selectShipping')}
-                                                name='shippingMethod' 
-                                                register={register} 
-                                                options={[
-                                                    { value: 'Free delivery', label: t('freeDelivery') }, 
-                                                    { value: 'Express (£5.00)', label: t('expressDelivery') }
-                                                ]} 
-                                            />
+											<Select
+												label={t('selectShipping')}
+												name='shippingMethod'
+												register={register}
+												options={[
+													{ value: 'Free delivery', label: t('freeDelivery') },
+													{ value: 'Express (£5.00)', label: t('expressDelivery') },
+												]}
+											/>
 										</div>
 									</div>
 
@@ -225,10 +241,9 @@ export default function Account() {
 										<button
 											type='button'
 											onClick={() => handleNextStep('payment')}
-											className='bg-blue-600 hover:bg-blue-700 text-white px-12 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[140px]'
-                                            disabled={isLoading}
-                                        >
-											{isLoading ? <Loader2 className="animate-spin" /> : t('paymentDetails')}
+											className='bg-[#448cd2] hover:bg-[#2a7dd0] cursor-pointer text-white px-12 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[140px]'
+											disabled={isLoading}>
+											{isLoading ? <Loader2 className='animate-spin' /> : t('paymentDetails')}
 										</button>
 									</div>
 								</div>
@@ -250,9 +265,21 @@ export default function Account() {
 											</div>
 										</div>
 
-										<Input label={t('nameOnCard')} name='cardName' register={register} error={errors.cardName?.message ? t('errorRequired') : undefined} showCheckIfValid={!!values.cardName && !errors.cardName} />
+										<Input
+											label={t('nameOnCard')}
+											name='cardName'
+											register={register}
+											error={errors.cardName?.message ? t('errorRequired') : undefined}
+											showCheckIfValid={!!values.cardName && !errors.cardName}
+										/>
 
-										<Input label={t('cardNumber')} name='cardNumber' placeholder='XXXX-XXXX' register={register} error={errors.cardNumber?.message ? t('errorRequired') : undefined} />
+										<Input
+											label={t('cardNumber')}
+											name='cardNumber'
+											placeholder='XXXX-XXXX'
+											register={register}
+											error={errors.cardNumber?.message ? t('errorRequired') : undefined}
+										/>
 
 										<div className='grid grid-cols-2 gap-6'>
 											<div className='flex gap-2'>
@@ -287,10 +314,9 @@ export default function Account() {
 										<button
 											type='button'
 											onClick={() => handleNextStep('complete')}
-											className='bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[160px]'
-                                            disabled={isLoading}
-                                        >
-											{isLoading ? <Loader2 className="animate-spin" /> : t('completeOrder')}
+											className='bg-[#448cd2] hover:bg-[#2a7dd0] cursor-pointer text-white px-8 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[160px]'
+											disabled={isLoading}>
+											{isLoading ? <Loader2 className='animate-spin' /> : t('completeOrder')}
 										</button>
 									</div>
 								</div>
