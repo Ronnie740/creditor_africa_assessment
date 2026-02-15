@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ShoppingBag, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 import { useLanguage } from './LanguageProvider';
-import { useCart } from './CartProvider';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,10 +19,32 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
+interface OrderItem {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+  quantity: number;
+}
+
+interface OrderSummaryData {
+  items: OrderItem[];
+  subtotal: number;
+  total: number;
+  currency: string;
+}
+
 const Navbar = () => {
   const { locale, setLocale, t } = useLanguage();
-  const { data } = useCart();
+  const [data, setData] = useState<OrderSummaryData | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  useEffect(() => {
+    fetch('/api/checkout/summary')
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((err) => console.error('Failed to fetch summary in navbar', err));
+  }, []);
 
   const formatCurrency = (amount: number, currency: string) => {
     return new Intl.NumberFormat(locale === 'en' ? 'en-GB' : 'fr-FR', {
