@@ -31,7 +31,7 @@ export default function Account() {
 		resolver: zodResolver(checkoutSchema),
 		mode: 'onChange', // Validate on change so checkmarks appear dynamically
 		defaultValues: {
-			email: 'Email@myemail.com',
+			email: 'johndoe@tesemail.com',
 			password: '********',
 			addressLine1: '123',
 			streetName: 'Electric avenue',
