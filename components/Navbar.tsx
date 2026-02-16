@@ -30,16 +30,16 @@ const Navbar = () => {
 			<div className='text-4xl font-black tracking-tight mx-5'>dummy.</div>
 			<div className='hidden md:flex space-x-12 text-gray-600 font-medium'>
 				<a href='#' className='hover:text-black'>
-					Home
+					{t('navHome')}
 				</a>
 				<a href='#' className='hover:text-black'>
-					Shop
+					{t('navShop')}
 				</a>
 				<a href='#' className='hover:text-black'>
-					Contact
+					{t('navContact')}
 				</a>
 				<a href='#' className='hover:text-black'>
-					Help
+					{t('navHelp')}
 				</a>
 			</div>
 			<div className='flex items-center space-x-4 md:space-x-8'>
@@ -57,7 +57,7 @@ const Navbar = () => {
 				</DropdownMenu>
 
 				<Button variant='ghost' className='hidden sm:flex items-center font-medium cursor-pointer'>
-					Account <ChevronDown className='ml-1 w-4 h-4' />
+					{t('navAccount')} <ChevronDown className='ml-1 w-4 h-4' />
 				</Button>
 
 				{/* Shadcn Cart Dialog */}
@@ -65,7 +65,7 @@ const Navbar = () => {
 					<DialogTrigger asChild>
 						<Button variant='ghost' className='flex items-center font-medium cursor-pointer'>
 							<ShoppingBag className='w-5 h-5 mr-2' />
-							{totalItems} {totalItems === 1 ? 'item' : 'items'}
+							{totalItems} {totalItems === 1 ? t('itemSingular') : t('itemPlural')}
 						</Button>
 					</DialogTrigger>
 					<DialogContent className='sm:max-w-[425px]'>
