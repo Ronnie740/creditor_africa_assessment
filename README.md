@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Checkout Flow Implementation - Credstore Assessment
 
-## Getting Started
+This project implements a 3-step checkout flow (Account, Shipping, Payment) using Next.js, React, TypeScript, and Tailwind CSS.
 
-First, run the development server:
+## Features Implemented
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 1. 3-Step Checkout Flow
+- **Account Step:** Email and Password validation.
+- **Shipping Step:** Address details and shipping method selection.
+- **Payment Step:** Credit card details validation.
+- **Progress Indicator:** Visualizes current step and completed steps.
+- **Navigation:** Next/Back controls with data persistence between steps.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. API Integration
+- **Dummy Backend:** Implemented using Next.js API Routes (`app/api/checkout/...`).
+- **Endpoints:**
+    - `GET /api/checkout/summary`: Fetches order summary (items, subtotal, tax, shipping, total).
+    - `POST /api/checkout/account`: Validates account details.
+    - `POST /api/checkout/shipping`: Validates shipping details.
+    - `POST /api/checkout/payment`: Validates payment details.
+    - `POST /api/checkout/complete`: Finalizes the order.
+- **Simulation:** Added artificial delay (400-800ms) to simulate network latency.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Internationalization (i18n)
+- **Support:** English (en) and French (fr).
+- **Language Switcher:** Located in the Navbar (toggles between EN/FR).
+- **Scope:** Translates all labels, buttons, error messages, and step indicators.
+- **Currency:** Formats prices based on the selected locale (GBP for EN, EUR formatting for FR - note: currency symbol remains consistent with API response for simplicity, but formatting rules apply).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Form Handling & Validation
+- **Library:** `react-hook-form` with `zod` for schema validation.
+- **Validation:** 
+    - Real-time feedback (checkmarks).
+    - Block progression on invalid fields.
+    - API-side validation simulation.
+- **Loading States:** Buttons show loading spinners during API calls.
 
-## Learn More
+### 5. Responsive Design
+- Mobile-friendly layout using Tailwind CSS.
+- Stacked layout on mobile, 2-column layout on desktop.
 
-To learn more about Next.js, take a look at the following resources:
+## Setup & Running
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Install Dependencies:**
+   ```bash
+   pnpm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Run Development Server:**
+   ```bash
+   pnpm dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Deploy on Vercel
+3. **Build:**
+   ```bash
+   pnpm build
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Design Decisions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **State Management:** Used `react-hook-form` to manage the entire checkout form state. The form wraps all steps to easily preserve data when navigating back and forth.
+- **i18n:** Implemented a lightweight `LanguageProvider` context to avoid heavy external libraries for this scope.
+- **API Strategy:** API routes mock server-side logic and return success/error responses which the frontend handles gracefully.
+
+## Project Structure
+
+- `app/api/checkout/`: API route handlers.
+- `components/Account.tsx`: Main checkout flow component.
+- `components/OrderSummary.tsx`: Dynamic order summary component.
+- `components/LanguageProvider.tsx`: i18n context provider.
+- `lib/translations.ts`: Translation dictionary.
+- `lib/schema.ts`: Zod validation schema.
+

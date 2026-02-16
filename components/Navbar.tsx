@@ -56,14 +56,14 @@ const Navbar = () => {
 					</DropdownMenuContent>
 				</DropdownMenu>
 
-				<Button variant='ghost' className='hidden sm:flex items-center font-medium'>
+				<Button variant='ghost' className='hidden sm:flex items-center font-medium cursor-pointer'>
 					Account <ChevronDown className='ml-1 w-4 h-4' />
 				</Button>
 
 				{/* Shadcn Cart Dialog */}
 				<Dialog open={isCartOpen} onOpenChange={setIsCartOpen}>
 					<DialogTrigger asChild>
-						<Button variant='ghost' className='flex items-center font-medium'>
+						<Button variant='ghost' className='flex items-center font-medium cursor-pointer'>
 							<ShoppingBag className='w-5 h-5 mr-2' />
 							{totalItems} {totalItems === 1 ? 'item' : 'items'}
 						</Button>

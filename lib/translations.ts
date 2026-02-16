@@ -8,6 +8,7 @@ export const translations = {
     registerAccount: 'Register for account',
     login: 'Login',
     cancelOrder: 'Cancel order',
+    back: 'Back',
     shippingDetails: 'Shipping details',
     useSavedAddress: 'Use saved address',
     firstLineAddress: 'First line of address',

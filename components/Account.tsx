@@ -49,8 +49,14 @@ export default function Account() {
 	const values = watch();
 
 	const handleCancel = () => {
-		if (confirm('Are you sure you want to cancel the order?')) {
-			router.push('/');
+		if (step === 'account') {
+			if (confirm('Are you sure you want to cancel the order?')) {
+				router.push('/account');
+			}
+		} else {
+			// Handle back navigation for other steps
+			if (step === 'shipping') setStep('account');
+			if (step === 'payment') setStep('shipping');
 		}
 	};
 
