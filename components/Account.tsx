@@ -178,14 +178,14 @@ export default function Account() {
 										</div>
 									</div>
 
-									<div className='border-t border-gray-200 mt-24 pt-8 flex items-center justify-end gap-6'>
-										<button type='button' onClick={handleCancel} className='text-gray-600 hover:text-black font-medium transition-colors'>
+									<div className='border-t border-gray-200 mt-24 pt-8 flex flex-col-reverse sm:flex-row items-center justify-end gap-4 sm:gap-6'>
+										<button type='button' onClick={handleCancel} className='text-gray-600 hover:text-black font-medium transition-colors w-full sm:w-auto'>
 											{t('cancelOrder')}
 										</button>
 										<button
 											type='button'
 											onClick={() => handleNextStep('shipping')}
-											className='bg-[#448cd2] hover:bg-[#2a7dd0] cursor-pointer text-white px-8 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[160px]'
+											className='bg-[#448cd2] hover:bg-[#2a7dd0] cursor-pointer text-white px-8 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[160px] w-full sm:w-auto'
 											disabled={isLoading}>
 											{isLoading ? <Loader2 className='animate-spin' /> : t('shippingDetails')}
 										</button>
@@ -240,14 +240,14 @@ export default function Account() {
 										</div>
 									</div>
 
-									<div className='border-t border-gray-200 mt-24 pt-8 flex items-center justify-end gap-6'>
-										<button type='button' onClick={handleCancel} className='text-gray-600 hover:text-black font-medium transition-colors'>
+									<div className='border-t border-gray-200 mt-24 pt-8 flex flex-col-reverse sm:flex-row items-center justify-end gap-4 sm:gap-6'>
+										<button type='button' onClick={handleCancel} className='text-gray-600 hover:text-black font-medium transition-colors w-full sm:w-auto'>
 											{t('cancelOrder')}
 										</button>
 										<button
 											type='button'
 											onClick={() => handleNextStep('payment')}
-											className='bg-[#448cd2] hover:bg-[#2a7dd0] cursor-pointer text-white px-12 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[140px]'
+											className='bg-[#448cd2] hover:bg-[#2a7dd0] cursor-pointer text-white px-12 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[140px] w-full sm:w-auto'
 											disabled={isLoading}>
 											{isLoading ? <Loader2 className='animate-spin' /> : t('paymentDetails')}
 										</button>
@@ -313,14 +313,14 @@ export default function Account() {
 										</div>
 									</div>
 
-									<div className='mt-20 pt-8 flex items-center justify-end gap-6 border-t border-gray-200'>
-										<button type='button' onClick={handleCancel} className='text-gray-600 hover:text-black font-medium transition-colors'>
+									<div className='mt-20 pt-8 flex flex-col-reverse sm:flex-row items-center justify-end gap-4 sm:gap-6 border-t border-gray-200'>
+										<button type='button' onClick={handleCancel} className='text-gray-600 hover:text-black font-medium transition-colors w-full sm:w-auto'>
 											{t('cancelOrder')}
 										</button>
 										<button
 											type='button'
 											onClick={() => handleNextStep('complete')}
-											className='bg-[#448cd2] hover:bg-[#2a7dd0] cursor-pointer text-white px-8 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[160px]'
+											className='bg-[#448cd2] hover:bg-[#2a7dd0] cursor-pointer text-white px-8 py-3 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md flex items-center justify-center min-w-[160px] w-full sm:w-auto'
 											disabled={isLoading}>
 											{isLoading ? <Loader2 className='animate-spin' /> : t('completeOrder')}
 										</button>
