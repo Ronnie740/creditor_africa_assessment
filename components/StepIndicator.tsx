@@ -9,22 +9,22 @@ const StepIndicator = ({ step }: { step: 'account' | 'shipping' | 'payment' }) =
 	const { t } = useLanguage();
 
 	return (
-		<div className='flex items-center mb-8 text-lg font-medium select-none'>
+		<div className='flex items-center mb-8 text-sm sm:text-lg font-medium select-none'>
 			<span className='text-[#448cd2]'>{t('stepAccount')}</span>
 
-			<span className='h-[2px] w-6 bg-blue-300 mx-3'></span>
+			<span className='h-0.5 w-3 sm:w-6 bg-blue-300 mx-1 sm:mx-3'></span>
 			<div className={cn('w-5 h-5 rounded-full flex items-center justify-center transition-colors duration-300', step !== 'account' ? 'bg-black text-white' : 'bg-gray-300')}>
 				{step !== 'account' && <Check className='w-3 h-3' />}
 			</div>
-			<span className='h-[2px] w-6 bg-blue-300 mx-3'></span>
+			<span className='h-0.5 w-3 sm:w-6 bg-blue-300 mx-1 sm:mx-3'></span>
 
 			<span className={cn(step !== 'account' ? 'text-[#448cd2]' : 'text-gray-800')}>{t('stepShipping')}</span>
 
-			<span className='h-[2px] w-6 bg-blue-300 mx-3'></span>
+			<span className='h-0.5 w-3 sm:w-6 bg-blue-300 mx-1 sm:mx-3'></span>
 			<div className={cn('w-5 h-5 rounded-full flex items-center justify-center transition-colors duration-300', step === 'payment' ? 'bg-black text-white' : 'bg-gray-300')}>
 				{step === 'payment' && <Check className='w-3 h-3' />}
 			</div>
-			<span className='h-[2px] w-6 bg-blue-300 mx-3'></span>
+			<span className='h-0.5 w-3 sm:w-6 bg-blue-300 mx-1 sm:mx-3'></span>
 
 			<span className={cn(step === 'payment' ? 'text-[#448cd2]' : 'text-gray-800')}>{t('stepPayment')}</span>
 		</div>

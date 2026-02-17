@@ -138,7 +138,7 @@ export default function Account() {
 
 			<div className='max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-80px)]'>
 				{/* Left Column: Forms */}
-				<div className='lg:col-span-7 p-8 lg:p-16 bg-gray-50 rounded-md m-10'>
+				<div className='lg:col-span-7 p-6 lg:p-16 bg-gray-50 rounded-md m-4 lg:m-10'>
 					<div className='max-w-xl mx-auto'>
 						<StepIndicator step={step} />
 
@@ -226,7 +226,7 @@ export default function Account() {
 											showCheckIfValid={!!values.streetName && !errors.streetName}
 										/>
 
-										<div className='grid grid-cols-2 gap-6'>
+										<div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
 											<Input label={t('postcode')} name='postcode' register={register} error={errors.postcode?.message ? t('errorRequired') : undefined} />
 											<Select
 												label={t('selectShipping')}
@@ -240,7 +240,7 @@ export default function Account() {
 										</div>
 									</div>
 
-									<div className='mt-24 pt-8 flex items-center justify-end gap-6'>
+									<div className='border-t border-gray-200 mt-24 pt-8 flex items-center justify-end gap-6'>
 										<button type='button' onClick={handleCancel} className='text-gray-600 hover:text-black font-medium transition-colors'>
 											{t('cancelOrder')}
 										</button>
@@ -287,7 +287,7 @@ export default function Account() {
 											error={errors.cardNumber?.message ? t('errorRequired') : undefined}
 										/>
 
-										<div className='grid grid-cols-2 gap-6'>
+										<div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
 											<div className='flex gap-2'>
 												<Input
 													label={t('expiration')}
@@ -332,7 +332,7 @@ export default function Account() {
 				</div>
 
 				{/* Right Column: Order Summary */}
-				<div className='lg:col-span-5 bg-gray-50 m-10 rounded-md'>
+				<div className='lg:col-span-5 bg-gray-50 m-4 lg:m-10 rounded-md'>
 					<OrderSummary />
 				</div>
 			</div>
